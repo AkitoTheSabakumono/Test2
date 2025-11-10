@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take a Test</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
+}
+
+.container {
+    margin: 60px auto;
+    max-width: 700px;
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+h1, h2 {
+    color: #6a11cb;
+    margin-bottom: 20px;
+}
+
+#question-container {
+    font-size: 20px;
+    margin-bottom: 30px;
+    min-height: 60px;
+}
+
+#answers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#answers-container button {
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#answers-container button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+#next-btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#next-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Fade in animation for questions */
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 id="test-title">Test</h1>
+    <div id="question-container" class="fade-in"></div>
+    <div id="answers-container"></div>
+    <button id="next-btn">Home Page</button>
+</div>
+
+<script src="js/test.js"></script>
+</body>
+</html>
