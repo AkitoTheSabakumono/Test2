@@ -4,62 +4,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Test Result</title>
-<link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+/* Dark, professional design */
 body {
     font-family: 'Poppins', sans-serif;
-    text-align:center;
-    background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
-    margin:0;
-    padding:0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: #eee;
 }
 
 .container {
     margin: 60px auto;
     max-width: 700px;
-    background:white;
-    padding: 40px 30px;
-    border-radius:16px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    background: #1a1a1a;
+    padding: 50px 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border: 2px solid #444;
 }
 
-h1 {color:#6a11cb; margin-bottom: 20px;}
+h1 {
+    color: #ffd700; /* gold title */
+    margin-bottom: 20px;
+    font-size: 2.8em;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.7);
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
 .rank {
-    font-size: 60px;
-    color: #ff512f;
-    margin: 30px 0;
-    font-weight: 700;
+    font-size: 80px;
+    font-weight: 800;
+    margin: 40px 0;
+    color: #c0c0c0; /* silver by default */
+    text-shadow: 2px 2px 15px rgba(255,215,0,0.4);
 }
 
+/* Gold accent for top results */
+.rank.gold {
+    color: #ffd700;
+    text-shadow: 2px 2px 20px rgba(255,215,0,0.7);
+}
+
+.rank.silver {
+    color: #c0c0c0;
+    text-shadow: 2px 2px 15px rgba(192,192,192,0.5);
+}
+
+.rank.bronze {
+    color: #cd7f32;
+    text-shadow: 2px 2px 15px rgba(205,127,50,0.5);
+}
+
+/* Buttons */
 .btn {
-    padding: 12px 25px;
-    margin: 10px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:600;
-    color:white;
-    background: linear-gradient(135deg, #ff512f, #dd2476);
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 14px 30px;
+    margin: 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+    background: linear-gradient(135deg, #ffd700, #ffc700);
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn.silver {
+    background: linear-gradient(135deg, #c0c0c0, #b8b8b8);
+    color: #111;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Responsive */
+@media(max-width: 500px) {
+    .rank {
+        font-size: 60px;
+    }
+    .btn {
+        width: 80%;
+        margin: 10px 0;
+    }
 }
 </style>
 </head>
 <body>
 <div class="container">
-<h1>Test Result</h1>
-<p>Your Level:</p>
-<div id="rank" class="rank">--</div>
-<div class="buttons">
-    <button id="retake-btn" class="btn">Retake Test</button>
-    <button id="home-btn" class="btn">Go to Homepage</button>
-</div>
+    <h1>Test Result</h1>
+    <p>Your Level:</p>
+    <div id="rank" class="rank">--</div>
+    <div class="buttons">
+        <button id="retake-btn" class="btn silver">Retake Test</button>
+        <button id="home-btn" class="btn gold">Go to Homepage</button>
+    </div>
 </div>
 
 <script>
@@ -69,7 +118,13 @@ const testName = urlParams.get('test');
 
 // Get the rank from localStorage
 const rankValue = localStorage.getItem(`${testName}_result`) || '--';
-document.getElementById('rank').textContent = rankValue;
+const rankEl = document.getElementById('rank');
+rankEl.textContent = rankValue;
+
+// Apply color based on level
+if(rankValue === 'C2' || rankValue === 'N1') rankEl.classList.add('gold');
+else if(rankValue === 'C1' || rankValue === 'N2') rankEl.classList.add('silver');
+else rankEl.classList.add('bronze');
 
 // Buttons
 document.getElementById('retake-btn').addEventListener('click', () => {
