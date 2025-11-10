@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Result</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
+    margin:0;
+    padding:0;
+}
+
+.container {
+    margin: 60px auto;
+    max-width: 700px;
+    background:white;
+    padding: 40px 30px;
+    border-radius:16px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+h1 {color:#6a11cb; margin-bottom: 20px;}
+.rank {
+    font-size: 60px;
+    color: #ff512f;
+    margin: 30px 0;
+    font-weight: 700;
+}
+
+.btn {
+    padding: 12px 25px;
+    margin: 10px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    color:white;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Test Result</h1>
+<p>Your Rank:</p>
+<div id="rank" class="rank">0</div>
+<div class="buttons">
+    <button id="retake-btn" class="btn">Retake Test</button>
+    <button id="home-btn" class="btn">Go to Homepage</button>
+</div>
+</div>
+
+<script>
+// Get which test was completed (from the URL)
+const urlParams = new URLSearchParams(window.location.search);
+const testName = urlParams.get('test');
+
+// Get the specific result for that test
+const rankValue = localStorage.getItem(`${testName}_result`) || 0;
+
+// Animate rank counting up
+let rank = 0;
+const target = parseInt(rankValue);
+const rankEl = document.getElementById('rank');
+
+const interval = setInterval(() => {
+    if(rank < target){
+        rank++;
+        rankEl.textContent = rank;
+    } else {
+        clearInterval(interval);
+    }
+}, 20);
+
+// Buttons
+document.getElementById('retake-btn').addEventListener('click', () => {
+    window.location.href = `test.html?test=${testName}`;
+});
+document.getElementById('home-btn').addEventListener('click', () => window.location.href = 'index.html');
+</script>
+</body>
+</html>
