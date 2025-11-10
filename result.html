@@ -54,8 +54,8 @@ h1 {color:#6a11cb; margin-bottom: 20px;}
 <body>
 <div class="container">
 <h1>Test Result</h1>
-<p>Your Rank:</p>
-<div id="rank" class="rank">0</div>
+<p>Your Level:</p>
+<div id="rank" class="rank">--</div>
 <div class="buttons">
     <button id="retake-btn" class="btn">Retake Test</button>
     <button id="home-btn" class="btn">Go to Homepage</button>
@@ -67,28 +67,17 @@ h1 {color:#6a11cb; margin-bottom: 20px;}
 const urlParams = new URLSearchParams(window.location.search);
 const testName = urlParams.get('test');
 
-// Get the specific result for that test
-const rankValue = localStorage.getItem(`${testName}_result`) || 0;
-
-// Animate rank counting up
-let rank = 0;
-const target = parseInt(rankValue);
-const rankEl = document.getElementById('rank');
-
-const interval = setInterval(() => {
-    if(rank < target){
-        rank++;
-        rankEl.textContent = rank;
-    } else {
-        clearInterval(interval);
-    }
-}, 20);
+// Get the rank from localStorage
+const rankValue = localStorage.getItem(`${testName}_result`) || '--';
+document.getElementById('rank').textContent = rankValue;
 
 // Buttons
 document.getElementById('retake-btn').addEventListener('click', () => {
     window.location.href = `test.html?test=${testName}`;
 });
-document.getElementById('home-btn').addEventListener('click', () => window.location.href = 'index.html');
+document.getElementById('home-btn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 </script>
 </body>
 </html>
