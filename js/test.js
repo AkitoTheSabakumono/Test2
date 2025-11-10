@@ -30,7 +30,6 @@ function showQuestion() {
     const qContainer = document.getElementById('question-container');
     const aContainer = document.getElementById('answers-container');
 
-    // Add progress
     qContainer.innerHTML = `<h3>Question ${currentQuestion + 1} of ${questions.length}</h3>
                             <h2>${q.question}</h2>`;
     aContainer.innerHTML = '';
@@ -50,33 +49,32 @@ function selectAnswer(e) {
     const selected = parseInt(e.target.dataset.answer);
     const q = questions[currentQuestion];
 
-    // Animate selection
-    const buttons = document.querySelectorAll('#answers-container button');
-    buttons.forEach(btn => btn.disabled = true); // prevent double clicks
-
+    // **Check answer correctly**
     if (selected === q.answer) {
         correctCount++;
-        e.target.style.background = 'linear-gradient(135deg, #00c853, #b2ff59)'; // green gradient
-    } else {
-        e.target.style.background = 'linear-gradient(135deg, #d50000, #ff5252)'; // red gradient
-        // highlight correct answer
-        buttons.forEach(btn => {
-            if (parseInt(btn.dataset.answer) === q.answer)
-                btn.style.background = 'linear-gradient(135deg, #00c853, #b2ff59)';
-        });
     }
 
+    // Disable all buttons to prevent multiple clicks
+    const buttons = document.querySelectorAll('#answers-container button');
+    buttons.forEach(btn => btn.disabled = true);
+
+    // **Do NOT show correct answer**
+    // Just move to next question after a short delay
     setTimeout(() => {
         currentQuestion++;
         showQuestion();
-    }, 700); // wait for animation
+    }, 300); // shorter delay
 }
 
 function goToResult() {
     const total = questions.length;
     const percentage = (correctCount / total) * 100;
-    let result;
 
+    // Store the numeric score for result page
+    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
+
+    // Optionally, store level or rank
+    let result;
     if (testName === 'english') {
         if (percentage >= 90) result = 'C2';
         else if (percentage >= 75) result = 'C1';
@@ -95,7 +93,6 @@ function goToResult() {
     }
 
     localStorage.setItem(`${testName}_result`, result);
-    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
     window.location.href = `result.html?test=${testName}`;
 }
 
@@ -104,7 +101,7 @@ document.getElementById('next-btn').addEventListener('click', () => {
     window.location.href = 'index.html';
 });
 
-// Helper functions
+// Helpers
 function shuffleArray(arr) {
     return arr.sort(() => Math.random() - 0.5);
 }
