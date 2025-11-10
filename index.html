@@ -1,124 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnthonyTheSabakumono</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnthonyTheSabakumono</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    color: #eee;
+}
 
-    header {
-      background: linear-gradient(90deg, #6a11cb, #2575fc);
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    header h1 {
-      font-size: 3em;
-      margin: 0 0 10px 0;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
-    }
+header {
+    background: linear-gradient(90deg, #222, #111);
+    color: #ffd700;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border-bottom: 2px solid #444;
+}
 
-    .test-menu {
-      margin: 50px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      padding: 0 20px;
-    }
+header h1 {
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
 
-    .test-button {
-      background: linear-gradient(135deg, #ff512f, #dd2476);
-      color: white;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 20px;
-      text-decoration: none;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-    }
+header p {
+    font-size: 1.2em;
+    color: #ccc;
+}
 
-    .test-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    }
+.test-menu {
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    padding: 0 20px;
+}
 
-    /* YouTube Button */
-    .youtube-button {
-      display: inline-block;
-      margin: 40px 0;
-      background-color: #FF0000;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 18px;
-      text-decoration: none;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .youtube-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
+.test-button {
+    background: linear-gradient(135deg, #ffd700, #e6c200); /* gold */
+    color: #111;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 20px;
+    text-decoration: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    footer {
-      background-color: #333;
-      color: white;
-      padding: 15px 0;
-      text-align: center;
-      position: relative;
-    }
+.test-button:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
 
-    /* Fade-in animation for menu */
-    .test-menu a {
-      opacity: 0;
-      animation: fadeIn 0.8s forwards;
-    }
-    .test-menu a:nth-child(1){ animation-delay: 0.2s; }
-    .test-menu a:nth-child(2){ animation-delay: 0.4s; }
-    .test-menu a:nth-child(3){ animation-delay: 0.6s; }
-    .test-menu a:nth-child(4){ animation-delay: 0.8s; }
+/* YouTube Button */
+.youtube-button {
+    display: inline-block;
+    margin: 40px 0;
+    background: linear-gradient(135deg, #c0c0c0, #a9a9a9); /* silver */
+    color: #111;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.youtube-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-  </style>
+footer {
+    background-color: #111;
+    color: #ccc;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 2px solid #444;
+}
+
+/* Fade-in animation for menu */
+.test-menu a {
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+}
+.test-menu a:nth-child(1){ animation-delay: 0.2s; }
+.test-menu a:nth-child(2){ animation-delay: 0.4s; }
+.test-menu a:nth-child(3){ animation-delay: 0.6s; }
+.test-menu a:nth-child(4){ animation-delay: 0.8s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+</style>
 </head>
 <body>
-  <header>
+<header>
     <h1>Тавтай морил</h1>
     <p>Сонгон туршиж үзээрэй</p>
-  </header>
+</header>
 
-  <main>
+<main>
     <div class="test-menu">
-      <a href="test.html?test=english" class="test-button">АНГЛИ ХЭЛ</a>
-      <a href="test.html?test=japanese" class="test-button">ЯПОН ХЭЛ</a>
-      <a href="test.html?test=iq" class="test-button">IQ Test</a>
-      <a href="test.html?test=personality" class="test-button">Personality Test</a>
+        <a href="test.html?test=english" class="test-button">АНГЛИ ХЭЛ</a>
+        <a href="test.html?test=japanese" class="test-button">ЯПОН ХЭЛ</a>
+        <a href="test.html?test=iq" class="test-button">IQ Test</a>
+        <a href="test.html?test=personality" class="test-button">Personality Test</a>
     </div>
 
     <div style="text-align: center;">
-      <a href="https://www.youtube.com/@anthonythesabakumono" target="_blank" class="youtube-button">
-        🎥 Манай суваг
-      </a>
+        <a href="https://www.youtube.com/@anthonythesabakumono" target="_blank" class="youtube-button">
+            🎥 Манай суваг
+        </a>
     </div>
-  </main>
+</main>
 
-  <footer>
+<footer>
     <p>&copy; 2025 AnthonyTheSabakumono</p>
-  </footer>
+</footer>
 </body>
 </html>
