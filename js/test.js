@@ -76,17 +76,17 @@ function goToResult() {
     // Optionally, store level or rank
     let result;
     if (testName === 'english') {
-        if (percentage >= 90) result = 'C2';
-        else if (percentage >= 75) result = 'C1';
-        else if (percentage >= 60) result = 'B2';
-        else if (percentage >= 45) result = 'B1';
+        if (percentage >= 96) result = 'C2';
+        else if (percentage >= 90) result = 'C1';
+        else if (percentage >= 70) result = 'B2';
+        else if (percentage >= 60) result = 'B1';
         else if (percentage >= 30) result = 'A2';
         else result = 'A1';
     } else if (testName === 'japanese') {
-        if (percentage >= 90) result = 'N1';
-        else if (percentage >= 75) result = 'N2';
+        if (percentage >= 96) result = 'N1';
+        else if (percentage >= 90) result = 'N2';
         else if (percentage >= 60) result = 'N3';
-        else if (percentage >= 45) result = 'N4';
+        else if (percentage >= 30) result = 'N4';
         else result = 'N5';
     } else {
         result = 'Unknown';
