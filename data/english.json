@@ -8,8 +8,7 @@
       "If I am you, I would study harder.",
       "If I be you, I would study harder."
     ],
-    "answer": 1,
-    "points": [1, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 2,
@@ -20,8 +19,7 @@
       "Yesterday, I lain down for a nap.",
       "Yesterday, I lying down for a nap."
     ],
-    "answer": 0,
-    "points": [3, 0, 1, 0]
+    "answer": 0
   },
   {
     "id": 3,
@@ -32,8 +30,7 @@
       "The cake were eaten by him yesterday.",
       "The cake is ate by him yesterday."
     ],
-    "answer": 0,
-    "points": [3, 0, 1, 0]
+    "answer": 0
   },
   {
     "id": 4,
@@ -44,8 +41,7 @@
       "If she studied, she would have passed.",
       "If she studies, she would have passed."
     ],
-    "answer": 1,
-    "points": [0, 3, 1, 0]
+    "answer": 1
   },
   {
     "id": 5,
@@ -56,8 +52,7 @@
       "The book which I borrowed is interesting.",
       "The girl who studies hard is my sister."
     ],
-    "answer": 0,
-    "points": [3, 1, 1, 1]
+    "answer": 0
   },
   {
     "id": 6,
@@ -68,8 +63,7 @@
       "You must finished the report yesterday.",
       "You must finishing the report yesterday."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 7,
@@ -80,8 +74,7 @@
       "Neither the teacher or the students were ready.",
       "Neither the teacher or the students was ready."
     ],
-    "answer": 1,
-    "points": [1, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 8,
@@ -92,8 +85,7 @@
       "He said that he will be tired.",
       "He said that he has been tired."
     ],
-    "answer": 1,
-    "points": [1, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 9,
@@ -104,8 +96,7 @@
       "By next year, I will be finishing college.",
       "By next year, I will finish college."
     ],
-    "answer": 1,
-    "points": [0, 3, 1, 1]
+    "answer": 1
   },
   {
     "id": 10,
@@ -116,8 +107,7 @@
       "I used to go to the gym every day.",
       "I used to went to the gym every day."
     ],
-    "answer": 2,
-    "points": [0, 0, 3, 0]
+    "answer": 2
   },
   {
     "id": 11,
@@ -128,8 +118,7 @@
       "She has been always late to meetings.",
       "She has been late always to meetings."
     ],
-    "answer": 1,
-    "points": [0, 3, 1, 0]
+    "answer": 1
   },
   {
     "id": 12,
@@ -140,8 +129,7 @@
       "I was working all night before the meeting.",
       "I had worked all night before the meeting."
     ],
-    "answer": 0,
-    "points": [3, 1, 1, 0]
+    "answer": 0
   },
   {
     "id": 13,
@@ -152,8 +140,7 @@
       "She has many information about the topic.",
       "She has much informations about the topic."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 14,
@@ -164,8 +151,7 @@
       "This is best than the other option.",
       "This is more best than the other option."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 15,
@@ -176,8 +162,7 @@
       "She wants learn French.",
       "She wants to learning French."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 16,
@@ -188,8 +173,7 @@
       "The criterias is listed here.",
       "The criteria is listed here."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 1]
+    "answer": 1
   },
   {
     "id": 17,
@@ -200,8 +184,7 @@
       "Either John or his friends am coming to the party.",
       "Either John or his friends be coming to the party."
     ],
-    "answer": 1,
-    "points": [1, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 18,
@@ -212,8 +195,7 @@
       "I wish I will know the answer now.",
       "I wish I would know the answer now."
     ],
-    "answer": 0,
-    "points": [3, 0, 0, 1]
+    "answer": 0
   },
   {
     "id": 19,
@@ -224,8 +206,7 @@
       "She enjoys swim in the ocean.",
       "She enjoys swimming in ocean."
     ],
-    "answer": 1,
-    "points": [0, 3, 0, 1]
+    "answer": 1
   },
   {
     "id": 20,
@@ -236,8 +217,7 @@
       "Although he was tired so he went to the gym.",
       "Although he was tired and he went to the gym."
     ],
-    "answer": 0,
-    "points": [3, 0, 0, 1]
+    "answer": 0
   },
   {
     "id": 21,
@@ -248,8 +228,7 @@
       "enthusiastic",
       "enthusiastically"
     ],
-    "answer": 0,
-    "points": [3, 1, 0, 0]
+    "answer": 0
   },
   {
     "id": 22,
@@ -260,133 +239,114 @@
       "old-fashioned but still used",
       "modern"
     ],
-    "answer": 0,
-    "points": [3, 0, 1, 0]
+    "answer": 0
   },
   {
     "id": 23,
     "question": "Pick the word that best fits in this sentence: 'He gave a __________ explanation that everyone understood.'",
     "options": ["confusing", "clear", "clarity", "clearing"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 24,
     "question": "Choose the correct word to complete the sentence: 'She has a strong __________ for learning new languages.'",
     "options": ["passion", "passionate", "passionately", "passiveness"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 25,
     "question": "Select the word that doesn’t belong in the group:",
     "options": ["happy", "joyful", "sad", "cheerful"],
-    "answer": 2,
-    "points": [0, 0, 3, 0]
+    "answer": 2
   },
   {
     "id": 26,
     "question": "Which of the following means 'to delay or postpone'?",
     "options": ["expedite", "procrastinate", "accelerate", "hasten"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 27,
     "question": "Choose the word that best completes the sentence: 'The weather was __________, so the picnic was cancelled.'",
     "options": ["unpredictable", "predictable", "predict", "prediction"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 28,
     "question": "Pick the word that means the opposite of 'scarce':",
     "options": ["plentiful", "rare", "minimal", "insufficient"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 29,
     "question": "Which word fits best? 'The artist’s work was __________, admired by critics and fans alike.'",
     "options": ["mediocre", "exceptional", "common", "average"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 30,
     "question": "Choose the best synonym for 'reluctant':",
     "options": ["eager", "hesitant", "willing", "enthusiastic"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 31,
     "question": "Fill in the blank: 'She showed great __________ in overcoming the challenges.'",
     "options": ["determination", "determined", "determine", "determines"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 32,
     "question": "Which word is an antonym of 'transparent'?",
     "options": ["clear", "opaque", "see-through", "translucent"],
-    "answer": 1,
-    "points": [0, 3, 0, 1]
+    "answer": 1
   },
   {
     "id": 33,
     "question": "Choose the word that best fits: 'He made a __________ decision that surprised everyone.'",
     "options": ["spontaneous", "spontaneity", "spontaneously", "spontaneousness"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 34,
     "question": "Pick the word that means 'to criticize severely':",
     "options": ["praise", "condemn", "compliment", "applaud"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 35,
     "question": "Which word fits? 'The new policy will __________ the efficiency of the company.'",
     "options": ["enhance", "hinder", "diminish", "reduce"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 36,
     "question": "Choose the word that best completes the sentence: 'Her attitude was __________, showing no concern for others.'",
     "options": ["indifferent", "interested", "caring", "indifferentness"],
-    "answer": 0,
-    "points": [3, 0, 0, 1]
+    "answer": 0
   },
   {
     "id": 37,
     "question": "Which word means 'to formally accept or agree to'?",
     "options": ["reject", "accept", "refuse", "deny"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   },
   {
     "id": 38,
     "question": "Pick the best word to complete the sentence: 'The mountain scenery was truly __________.'",
     "options": ["breathtaking", "boring", "breathless", "breath"],
-    "answer": 0,
-    "points": [3, 0, 0, 0]
+    "answer": 0
   },
   {
     "id": 39,
     "question": "Choose the word that best fits: 'He spoke in a __________ voice, calming everyone down.'",
     "options": ["soothing", "harsh", "harshly", "soothingly"],
-    "answer": 0,
-    "points": [3, 0, 0, 1]
+    "answer": 0
   },
   {
     "id": 40,
     "question": "Which word means 'to make something easier'?",
     "options": ["complicate", "facilitate", "confuse", "hinder"],
-    "answer": 1,
-    "points": [0, 3, 0, 0]
+    "answer": 1
   }
 ]
