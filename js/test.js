@@ -82,7 +82,7 @@ function goToResult() {
         else if (percentage >= 70) result = '70 B1';
         else if (percentage >= 60) result = '60 A2';
         else if (percentage >= 50) result = '50 B2';
-        else result = 'A1';
+        else result = 'A1 ghde ci muu';
     } else if (testName === 'japanese') {
         if (percentage >= 96) result = 'N1';
         else if (percentage >= 90) result = 'N2';
