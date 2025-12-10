@@ -88,6 +88,10 @@ function goToResult() {
         else if (percentage >= 60) result = 'N3';
         else if (percentage >= 30) result = 'N4';
         else result = 'N5';
+    } else if (testName === 'personality') {
+        if (percentage >= 67) result = 'Deep Introvert';
+        else if (percentage >= 37) result = 'Ambivert';
+        else result = 'Extrovert Dynamo';
     } else {
         result = 'Unknown';
     }
