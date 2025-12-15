@@ -1,0 +1,7 @@
+[
+  {"level": "N1", "min": 96, "max": 100, "description": "You can understand Japanese at an advanced level."},
+  {"level": "N2", "min": 90, "max": 95, "description": "You can understand Japanese at a pre-advanced level."},
+  {"level": "N3", "min": 60, "max": 89, "description": "You have intermediate Japanese skills."},
+  {"level": "N4", "min": 30, "max": 59, "description": "You can understand basic Japanese."},
+  {"level": "N5", "min": 0, "max": 29, "description": "You are a beginner in Japanese."}
+]
