@@ -1,0 +1,8 @@
+[
+  {"level": "C2", "min": 96, "max": 100, "description": "You have mastered English at a near-native level."},
+  {"level": "C1", "min": 90, "max": 95, "description": "You have an advanced level of English proficiency."},
+  {"level": "B2", "min": 70, "max": 89, "description": "You are an upper-intermediate English speaker."},
+  {"level": "B1", "min": 50, "max": 69, "description": "You are an intermediate English speaker."},
+  {"level": "A2", "min": 30, "max": 49, "description": "You are a basic English speaker with limited ability."},
+  {"level": "A1", "min": 0, "max": 29, "description": "You are a beginner in English."}
+]
