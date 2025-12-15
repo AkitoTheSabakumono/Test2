@@ -1,33 +1,23 @@
 let questions = [];
 let currentQuestion = 0;
 let correctCount = 0;
-let totalScore = 0;
 let testName = '';
-let isScoreBased = false;
-let resultsDescription = [];
 
 function loadTest() {
     const urlParams = new URLSearchParams(window.location.search);
     testName = urlParams.get('test') || 'english';
     const path = `data/${testName}.json`;
-    const descPath = `data/${testName}_results.json`;
 
     fetch(path)
-        .then(res => res.ok ? res.json() : Promise.reject(`File not found: ${path}`))
+        .then(response => {
+            if (!response.ok) throw new Error(`File not found: ${path}`);
+            return response.json();
+        })
         .then(data => {
-            if (data.length > 0) {
-                // Detect if test is score-based or correct-answer based
-                isScoreBased = !!data[0].options[0].score;
-            }
             questions = getRandomQuestions(data, 20);
             showQuestion();
         })
         .catch(err => console.error("Error loading test:", err));
-
-    fetch(descPath)
-        .then(res => res.ok ? res.json() : Promise.reject(`File not found: ${descPath}`))
-        .then(data => resultsDescription = data)
-        .catch(err => console.warn("Result description file not found:", err));
 }
 
 function showQuestion() {
@@ -46,16 +36,9 @@ function showQuestion() {
 
     const optionIndexes = shuffleArray(q.options.map((_, i) => i));
     optionIndexes.forEach(i => {
-        const option = q.options[i];
         const btn = document.createElement('button');
-        btn.textContent = option.answer;
-
-        if (isScoreBased) {
-            btn.dataset.score = option.score;
-        } else {
-            btn.dataset.answer = i;
-        }
-
+        btn.textContent = q.options[i];
+        btn.dataset.answer = i;
         btn.classList.add('fade-in');
         btn.addEventListener('click', selectAnswer);
         aContainer.appendChild(btn);
@@ -63,54 +46,64 @@ function showQuestion() {
 }
 
 function selectAnswer(e) {
+    const selected = parseInt(e.target.dataset.answer);
     const q = questions[currentQuestion];
 
-    if (isScoreBased) {
-        const score = parseInt(e.target.dataset.score);
-        totalScore += score;
-    } else {
-        const selected = parseInt(e.target.dataset.answer);
-        if (selected === q.answer) correctCount++;
+    // **Check answer correctly**
+    if (selected === q.answer) {
+        correctCount++;
     }
 
-    document.querySelectorAll('#answers-container button').forEach(btn => btn.disabled = true);
+    // Disable all buttons to prevent multiple clicks
+    const buttons = document.querySelectorAll('#answers-container button');
+    buttons.forEach(btn => btn.disabled = true);
 
+    // **Do NOT show correct answer**
+    // Just move to next question after a short delay
     setTimeout(() => {
         currentQuestion++;
         showQuestion();
-    }, 300);
+    }, 300); // shorter delay
 }
 
 function goToResult() {
-    if (isScoreBased) {
-        // Score-based test logic (as before)
-    } else {
-        // Correct-answer test
-        const total = questions.length;
-        const percentage = (correctCount / total) * 100;
-        localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
+    const total = questions.length;
+    const percentage = (correctCount / total) * 100;
 
-        // Load level descriptions dynamically
-        fetch(`data/${testName}_levels.json`)
-            .then(res => res.ok ? res.json() : [])
-            .then(levels => {
-                let levelInfo = { level: "Unknown", description: "" };
-                for (let l of levels) {
-                    if (percentage >= l.min && percentage <= l.max) {
-                        levelInfo = l;
-                        break;
-                    }
-                }
-                localStorage.setItem(`${testName}_result_description`, `${levelInfo.level}: ${levelInfo.description}`);
-                window.location.href = `result.html?test=${testName}`;
-            })
-            .catch(err => {
-                console.warn("Level description file not found:", err);
-                window.location.href = `result.html?test=${testName}`;
-            });
+    // Store the numeric score for result page
+    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
+
+    // Optionally, store level or rank
+    let result;
+    if (testName === 'english') {
+        if (percentage >= 96) result = 'C2';
+        else if (percentage >= 90) result = 'C1';
+        else if (percentage >= 70) result = 'B2';
+        else if (percentage >= 50) result = 'B1';
+        else if (percentage >= 30) result = 'A2';
+        else result = 'A1';
+    } else if (testName === 'japanese') {
+        if (percentage >= 96) result = 'N1';
+        else if (percentage >= 90) result = 'N2';
+        else if (percentage >= 60) result = 'N3';
+        else if (percentage >= 30) result = 'N4';
+        else result = 'N5';
+    } else if (testName === 'personality') {
+        if (percentage >= 67) result = 'Deep Introvert';
+        else if (percentage >= 37) result = 'Ambivert';
+        else result = 'Extrovert Dynamo';
+    } else {
+        result = 'Unknown';
     }
+
+    localStorage.setItem(`${testName}_result`, result);
+    window.location.href = `result.html?test=${testName}`;
 }
 
+// Home page button
+document.getElementById('next-btn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 
 // Helpers
 function shuffleArray(arr) {
