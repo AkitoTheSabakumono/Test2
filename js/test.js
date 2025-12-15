@@ -67,38 +67,88 @@ function selectAnswer(e) {
 }
 
 function goToResult() {
-    const total = questions.length;
-    const percentage = (correctCount / total) * 100;
+    const totalQuestions = questions.length;
+    const percentage = (correctCount / totalQuestions) * 100;
 
-    // Store the numeric score for result page
+    // Store numeric score
     localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
 
-    // Optionally, store level or rank
-    let result;
+    // Determine the result label (level or personality)
+    let resultLabel;
     if (testName === 'english') {
-        if (percentage >= 96) result = 'C2';
-        else if (percentage >= 90) result = 'C1';
-        else if (percentage >= 70) result = 'B2';
-        else if (percentage >= 50) result = 'B1';
-        else if (percentage >= 30) result = 'A2';
-        else result = 'A1';
+        if (percentage >= 96) resultLabel = 'C2';
+        else if (percentage >= 90) resultLabel = 'C1';
+        else if (percentage >= 70) resultLabel = 'B2';
+        else if (percentage >= 50) resultLabel = 'B1';
+        else if (percentage >= 30) resultLabel = 'A2';
+        else resultLabel = 'A1';
     } else if (testName === 'japanese') {
-        if (percentage >= 96) result = 'N1';
-        else if (percentage >= 90) result = 'N2';
-        else if (percentage >= 60) result = 'N3';
-        else if (percentage >= 30) result = 'N4';
-        else result = 'N5';
+        if (percentage >= 96) resultLabel = 'N1';
+        else if (percentage >= 90) resultLabel = 'N2';
+        else if (percentage >= 60) resultLabel = 'N3';
+        else if (percentage >= 30) resultLabel = 'N4';
+        else resultLabel = 'N5';
     } else if (testName === 'personality') {
-        if (percentage >= 67) result = 'Deep Introvert';
-        else if (percentage >= 37) result = 'Ambivert';
-        else result = 'Extrovert Dynamo';
+        if (percentage >= 67) resultLabel = 'Deep Introvert';
+        else if (percentage >= 37) resultLabel = 'Ambivert';
+        else resultLabel = 'Extrovert Dynamo';
     } else {
-        result = 'Unknown';
+        resultLabel = 'Unknown';
     }
 
-    localStorage.setItem(`${testName}_result`, result);
-    window.location.href = `result.html?test=${testName}`;
+    localStorage.setItem(`${testName}_result`, resultLabel);
+
+    // Now fetch description dynamically
+    // English/Japanese → levels JSON
+    // Personality/IQ → results JSON
+    let descriptionFile = '';
+    if (testName === 'english' || testName === 'japanese') {
+        descriptionFile = `data/${testName}_levels.json`;
+    } else {
+        descriptionFile = `data/${testName}_results.json`;
+    }
+
+    fetch(descriptionFile)
+        .then(res => {
+            if (!res.ok) throw new Error(`File not found: ${descriptionFile}`);
+            return res.json();
+        })
+        .then(data => {
+            let description = 'No description available';
+            
+            // Correct-answer tests (levels) have min/max by percentage
+            if (testName === 'english' || testName === 'japanese') {
+                for (let item of data) {
+                    if (percentage >= item.min && percentage <= item.max) {
+                        description = item.description;
+                        break;
+                    }
+                }
+            } else {
+                // Score-based tests (personality/IQ) use score
+                const totalScore = questions.reduce((sum, q) => {
+                    const selectedOption = q.options.find(opt => opt.selected);
+                    return sum + (selectedOption ? selectedOption.score : 0);
+                }, 0);
+                for (let item of data) {
+                    if (totalScore >= item.min && totalScore <= item.max) {
+                        description = item.text;
+                        break;
+                    }
+                }
+            }
+
+            localStorage.setItem(`${testName}_result_description`, description);
+            // Redirect to result page
+            window.location.href = `result.html?test=${testName}`;
+        })
+        .catch(err => {
+            console.error("Error loading description:", err);
+            localStorage.setItem(`${testName}_result_description`, '');
+            window.location.href = `result.html?test=${testName}`;
+        });
 }
+
 
 // Home page button
 document.getElementById('next-btn').addEventListener('click', () => {
