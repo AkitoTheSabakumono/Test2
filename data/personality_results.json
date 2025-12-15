@@ -1,0 +1,5 @@
+[
+  {"min": 0, "max": 3, "text": "Introvert"},
+  {"min": 4, "max": 6, "text": "Ambivert"},
+  {"min": 7, "max": 9, "text": "Extrovert"}
+]
