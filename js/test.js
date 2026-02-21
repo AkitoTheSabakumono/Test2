@@ -89,9 +89,9 @@ function goToResult() {
         else if (percentage >= 30) resultLabel = 'N4';
         else resultLabel = 'N5';
     } else if (testName === 'personality') {
-        if (percentage >= 67) resultLabel = 'Deep Introvert';
-        else if (percentage >= 37) resultLabel = 'Ambivert';
-        else resultLabel = 'Extrovert Dynamo';
+        if (percentage >= 67) resultLabel = 'Extrovert Dynamo';
+        else if (percentage >= 37 & percentage < 67) resultLabel = 'Ambivert';
+        else resultLabel = 'Deep Introvert';
     } else {
         resultLabel = 'Unknown';
     }
