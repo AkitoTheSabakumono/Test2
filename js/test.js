@@ -70,10 +70,7 @@ function goToResult() {
     const totalQuestions = questions.length;
     const percentage = (correctCount / totalQuestions) * 100;
 
-    // Store numeric score
-    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
-
-    // Determine the result label (level or personality)
+    // Determine result label
     let resultLabel;
     if (testName === 'english') {
         if (percentage >= 96) resultLabel = 'C2';
@@ -90,70 +87,38 @@ function goToResult() {
         else resultLabel = 'N5';
     } else if (testName === 'personality') {
         if (percentage >= 80) resultLabel = 'Extrovert Dynamo';
-        else if (percentage >= 20 & percentage < 80) resultLabel = 'Ambivert';
+        else if (percentage >= 20 && percentage < 80) resultLabel = 'Ambivert';
         else resultLabel = 'Deep Introvert';
     } else {
         resultLabel = 'Unknown';
     }
 
+    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
     localStorage.setItem(`${testName}_result`, resultLabel);
 
-    // Now fetch description dynamically
-    // English/Japanese → levels JSON
-    // Personality/IQ → results JSON
-    let descriptionFile = '';
-    if (testName === 'english' || testName === 'japanese') {
-        descriptionFile = `data/${testName}_levels.json`;
+    // Get Discord userId from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId'); // should be passed by bot link
+    if (userId) {
+        // Send result to Vortexa bot server
+        fetch('https://YOUR_VORTEXA_SERVER_IP:3000/submit-result', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: userId,
+                score: percentage.toFixed(1)
+            })
+        })
+        .then(res => res.json())
+        .then(data => console.log('Score saved:', data))
+        .catch(err => console.error('Error saving score:', err));
     } else {
-        descriptionFile = `data/${testName}_results.json`;
+        console.warn('No userId found in URL. Score not sent to bot.');
     }
 
-    fetch(descriptionFile)
-        .then(res => {
-            if (!res.ok) throw new Error(`File not found: ${descriptionFile}`);
-            return res.json();
-        })
-        .then(data => {
-            let description = 'No description available';
-            
-            // Correct-answer tests (levels) have min/max by percentage
-            if (testName === 'english' || testName === 'japanese') {
-                for (let item of data) {
-                    if (percentage >= item.min && percentage <= item.max) {
-                        description = item.description;
-                        break;
-                    }
-                }
-            } else {
-                // Score-based tests (personality/IQ) use score
-                const totalScore = questions.reduce((sum, q) => {
-                    const selectedOption = q.options.find(opt => opt.selected);
-                    return sum + (selectedOption ? selectedOption.score : 0);
-                }, 0);
-                for (let item of data) {
-                    if (totalScore >= item.min && totalScore <= item.max) {
-                        description = item.text;
-                        break;
-                    }
-                }
-            }
-
-            localStorage.setItem(`${testName}_result_description`, description);
-            // Redirect to result page
-            window.location.href = `result.html?test=${testName}`;
-        })
-        .catch(err => {
-            console.error("Error loading description:", err);
-            localStorage.setItem(`${testName}_result_description`, '');
-            window.location.href = `result.html?test=${testName}`;
-        });
+    // Redirect to result page
+    window.location.href = `result.html?test=${testName}`;
 }
-
-
-// Home page button
-document.getElementById('next-btn').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
 
 // Helpers
 function shuffleArray(arr) {
