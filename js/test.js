@@ -101,7 +101,7 @@ function goToResult() {
     const userId = urlParams.get('userId'); // should be passed by bot link
     if (userId) {
         // Send result to Vortexa bot server
-        fetch('https://YOUR_VORTEXA_SERVER_IP:3000/submit-result', {
+        fetch('https://45.131.65.107:25864/submit-result', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
