@@ -76,6 +76,7 @@ function goToResult() {
     const percentage = (correctCount / total) * 100;
 
     let result;
+
     if (testName === 'english') {
         if (percentage >= 96) result = 'C2';
         else if (percentage >= 90) result = 'C1';
@@ -89,38 +90,36 @@ function goToResult() {
         else if (percentage >= 60) result = 'N3';
         else if (percentage >= 30) result = 'N4';
         else result = 'N5';
-    } else if (testName === 'personality'){
-        if  (percentage >= 70) result = ' Extrovert'
-        else if (percentage < 70 && percentage >= 30) result = 'Abrivert'
-        else result = 'Introvert'
     } else {
         result = 'Unknown';
     }
 
-    // Send result to bot server
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
+
     if (userId) {
-        fetch('/submit-result', {
+        fetch('https://YOUR_VORTEXA_URL/submit-result', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 userId,
                 testType: testName,
                 score: percentage.toFixed(1),
                 level: result
             })
-        }).catch(err => console.error('Failed to send test result:', err));
+        })
+        .then(res => res.json())
+        .then(data => console.log('Result saved:', data))
+        .catch(err => console.error('Failed to send test result:', err));
     }
 
     localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
     localStorage.setItem(`${testName}_result`, result);
+
     window.location.href = `result.html?test=${testName}`;
 }
-// Home page button
-document.getElementById('next-btn')?.addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
 
 // ------------------
 // Helpers
