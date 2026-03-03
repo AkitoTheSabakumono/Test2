@@ -75,10 +75,6 @@ function goToResult() {
     const total = questions.length;
     const percentage = (correctCount / total) * 100;
 
-    // Store numeric score
-    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
-
-    // Store level/rank based on test type
     let result;
     if (testName === 'english') {
         if (percentage >= 96) result = 'C2';
@@ -96,15 +92,31 @@ function goToResult() {
     } else if (testName === 'personality'){
         if  (percentage >= 70) result = ' Extrovert'
         else if (percentage < 70 && percentage >= 30) result = 'Abrivert'
-        else result = 'Introver'
+        else result = 'Introvert'
     } else {
         result = 'Unknown';
     }
 
+    // Send result to bot server
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    if (userId) {
+        fetch('/submit-result', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId,
+                testType: testName,
+                score: percentage.toFixed(1),
+                level: result
+            })
+        }).catch(err => console.error('Failed to send test result:', err));
+    }
+
+    localStorage.setItem(`${testName}_score`, percentage.toFixed(1));
     localStorage.setItem(`${testName}_result`, result);
     window.location.href = `result.html?test=${testName}`;
 }
-
 // Home page button
 document.getElementById('next-btn')?.addEventListener('click', () => {
     window.location.href = 'index.html';
