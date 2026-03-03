@@ -5,7 +5,10 @@ let currentQuestion = 0;
 let correctCount = 0;
 let testName = '';
 
-// Load test from JSON file based on URL parameter
+// ------------------------
+// Load Test Questions
+// ------------------------
+
 function loadTest() {
     const urlParams = new URLSearchParams(window.location.search);
     testName = urlParams.get('test') || 'english';
@@ -26,7 +29,10 @@ function loadTest() {
         .catch(err => console.error("Error loading test:", err));
 }
 
-// Display the current question and its options
+// ------------------------
+// Show Question
+// ------------------------
+
 function showQuestion() {
     if (currentQuestion >= questions.length) {
         goToResult();
@@ -41,42 +47,43 @@ function showQuestion() {
                             <h2>${q.question}</h2>`;
     aContainer.innerHTML = '';
 
-    // Shuffle options but keep track of the correct answer
     const optionIndexes = shuffleArray(q.options.map((_, i) => i));
-
     optionIndexes.forEach(i => {
         const btn = document.createElement('button');
         btn.textContent = q.options[i];
-        btn.dataset.correct = i === q.answer; // true if this is the correct answer
+        btn.dataset.correct = i === q.answer;
         btn.classList.add('fade-in');
         btn.addEventListener('click', selectAnswer);
         aContainer.appendChild(btn);
     });
 }
 
-// Handle answer selection
+// ------------------------
+// Select Answer
+// ------------------------
+
 function selectAnswer(e) {
     const isCorrect = e.target.dataset.correct === 'true';
     if (isCorrect) correctCount++;
 
-    // Disable all buttons to prevent multiple clicks
     const buttons = document.querySelectorAll('#answers-container button');
     buttons.forEach(btn => btn.disabled = true);
 
-    // Move to next question after a short delay
     setTimeout(() => {
         currentQuestion++;
         showQuestion();
     }, 300);
 }
 
-// Calculate result and go to result page
+// ------------------------
+// Calculate Result & Submit
+// ------------------------
+
 function goToResult() {
     const total = questions.length;
     const percentage = (correctCount / total) * 100;
 
     let result;
-
     if (testName === 'english') {
         if (percentage >= 96) result = 'C2';
         else if (percentage >= 90) result = 'C1';
@@ -90,6 +97,10 @@ function goToResult() {
         else if (percentage >= 60) result = 'N3';
         else if (percentage >= 30) result = 'N4';
         else result = 'N5';
+    } else if (testName === 'personality') {
+        if  (percentage >= 70) result = 'Extrovert';
+        else if (percentage >= 30) result = 'Ambivert';
+        else result = 'Introvert';
     } else {
         result = 'Unknown';
     }
@@ -98,11 +109,9 @@ function goToResult() {
     const userId = urlParams.get('userId');
 
     if (userId) {
-        fetch('https://YOUR_VORTEXA_URL/submit-result', {
+        fetch('https://node.premium.vortexa.cloud/submit-result', { // ⚠️ <-- Your full public URL here
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId,
                 testType: testName,
@@ -121,11 +130,18 @@ function goToResult() {
     window.location.href = `result.html?test=${testName}`;
 }
 
-// ------------------
-// Helpers
-// ------------------
+// ------------------------
+// Home button
+// ------------------------
 
-// Fisher–Yates shuffle for uniform randomization
+document.getElementById('next-btn')?.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+// ------------------------
+// Helpers
+// ------------------------
+
 function shuffleArray(arr) {
     const array = [...arr];
     for (let i = array.length - 1; i > 0; i--) {
@@ -135,11 +151,13 @@ function shuffleArray(arr) {
     return array;
 }
 
-// Select up to n random questions from the array
 function getRandomQuestions(arr, n) {
     const shuffled = shuffleArray(arr);
     return shuffled.slice(0, Math.min(n, shuffled.length));
 }
 
-// Start test when page loads
+// ------------------------
+// Start test
+// ------------------------
+
 window.addEventListener('DOMContentLoaded', loadTest);
